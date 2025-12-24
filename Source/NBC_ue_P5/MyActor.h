@@ -14,6 +14,9 @@ class NBC_UE_P5_API AMyActor : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AMyActor();
+	void Move();
+	void Turn();
+	void RandEvent();
 
 protected:
 	// Called when the game starts or when spawned
