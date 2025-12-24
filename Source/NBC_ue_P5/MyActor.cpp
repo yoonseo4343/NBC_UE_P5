@@ -17,10 +17,11 @@ AMyActor::AMyActor()
 void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+	FVector startLocation = GetActorLocation();
+	int eCNT = 0;
 	if (GEngine) {
 		/*GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT("Hi"));*/
-		for (int i = 1; i <= 100; i++) {
+		for (int i = 1; i <= 50; i++) {
 			Move();
 			Turn();
 			GEngine->AddOnScreenDebugMessage(
@@ -34,8 +35,19 @@ void AMyActor::BeginPlay()
 			if (i % 10 == 0) {
 				//10번마다 이벤트 랜덤
 				int rn = FMath::RandRange(0, 1);
-				if (rn)
+				if (rn) {
 					RandEvent();
+					eCNT += 1;
+				}
+				//총 이동거리, 총 이벤트 발생 횟수 출력
+				GEngine->AddOnScreenDebugMessage(
+					-1,
+					10.0f,
+					FColor::Blue,
+					FString::Printf(
+						TEXT("Location: %s, Event Count: %d"),*(GetActorLocation()-startLocation).ToString(), eCNT
+					)
+				);
 			}
 
 		}
